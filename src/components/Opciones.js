@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+ import React, { Component } from "react";
+
 
 class Opciones extends Component {
-  render() {
+   render() {
     return (
       <div className="opciones">
         <div className="opcion">
@@ -16,9 +17,9 @@ class Opciones extends Component {
           </button>
           <h2>{this.props.opcionB}</h2>
         </div>
-      </div>
+      </div> 
     );
   }
 }
 
-export default Opciones;
+export default Opciones; 

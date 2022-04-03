@@ -19,52 +19,54 @@ class Main extends Component {
     });
   };
 
-  componentDidUpdate() {
-         if (this.state.contador >= 7 ){
-           alert(
-            "Fin"
-           );
-         }
-       }
+  componentDidMount() {
+    alert("Elije tu propia aventura");
+  }
 
-  handleClick = (valor) => {
-    const id = valor.target.id;
-    /* if (this.state.contador >= 7) {
-      alert("Colorin colorado este cuento se ha terminado");
-     
-  } else  */if (id === "A" && this.state.ultimaSeleccion !== "A") {
-      this.setState({
-        contador: this.state.contador + 1,
-        ultimaSeleccion: "A",
-      });
-
-    } else if (id === "A" && this.state.ultimaSeleccion === "A") {
-      this.setState({
-        contador: this.state.contador + 2,
-      });
-    } else if (id === "B" && this.state.ultimaSeleccion === "A") {
-      this.setState({
-        contador: this.state.contador + 3,
-        ultimaSeleccion: "B",
-      });
-    } else if (id === "B") {
-      this.setState({
-        contador: this.state.contador + 2,
-        ultimaSeleccion: "B",
-      });
+  handleClick = (e) => {
+    const id = e.target.id;
+    if (this.state.contador >= 7) {
+      alert("Fin");
+    }
+    if (id === "A") {
+      if (this.state.ultimaSeleccion === "A") {
+        this.setState({
+          contador: this.state.contador + 2,
+          ultimaSeleccion: "A",
+        });
+      } else if (this.state.ultimaSeleccion !== "A") {
+        this.setState({
+          contador: this.state.contador + 1,
+          ultimaSeleccion: "A",
+        });
+      }
+    }
+    if (id === "B") {
+      if (this.state.ultimaSeleccion === "A") {
+        this.setState({
+          contador: this.state.contador + 3,
+          ultimaSeleccion: "B",
+        });
+      } else if (this.state.ultimaSeleccion !== "A") {
+        this.setState({
+          contador: this.state.contador + 2,
+          ultimaSeleccion: "B",
+        });
+      }
     }
   };
 
   render() {
     return (
-      <div className="layout">
+      <div className="main">
         <h1 className="historia">{data[this.state.contador].historia}</h1>
         <Opciones
           handleClick={this.handleClick}
           opcionA={data[this.state.contador].opciones.a}
           opcionB={data[this.state.contador].opciones.b}
         />
-       <Reiniciar reiniciarHistoria={this.reiniciarHistoria} />
+        <h3 className="selecciones">Selección anterior: {this.state.ultimaSeleccion}</h3>
+        <Reiniciar reiniciarHistoria={this.reiniciarHistoria} />
       </div>
     );
   }
